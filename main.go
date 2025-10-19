@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"math/rand"
 	"net/http"
 	"strconv"
 
@@ -59,7 +58,10 @@ func createMovie(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var movie Movie
 	_ = json.NewDecoder(r.Body).Decode(&movie)
-	movie.ID = strconv.Itoa(rand.Intn(100000000))
+	// ini membuat id dari movienya acak
+	// movie.ID = strconv.Itoa(rand.Intn(100000000))
+	//ini membuat id nya berurutan
+	movie.ID = strconv.Itoa(len(movies) + 1)
 	movies = append(movies, movie)
 	json.NewEncoder(w).Encode(movie)
 }
